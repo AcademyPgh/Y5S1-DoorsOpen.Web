@@ -24,7 +24,7 @@ namespace BlogThing.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles ="Administrator")]
         public IActionResult Privacy()
         {
             return View();

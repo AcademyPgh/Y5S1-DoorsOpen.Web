@@ -1,9 +1,11 @@
+using BlogThing.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +13,7 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BlogThing
@@ -27,6 +30,11 @@ namespace BlogThing
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Database
+            services.AddDbContext<BlogDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+
             // Add authentication services
             services.AddAuthentication(options =>
             {
@@ -80,6 +88,16 @@ namespace BlogThing
                         context.Response.Redirect(logoutUri);
                         context.HandleResponse();
 
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = (context) =>
+                    {
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Role, "Administrator")
+                        };
+
+                        context.Principal.AddIdentity(new ClaimsIdentity(claims));
                         return Task.CompletedTask;
                     }
                 };
