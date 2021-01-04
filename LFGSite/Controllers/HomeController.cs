@@ -1,4 +1,4 @@
-﻿using BlogThing.Models;
+﻿using LFGSite.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlogThing.Controllers
+namespace LFGSite.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,5 @@
-using BlogThing.Data;
+using LFGSite.Data;
+using LFGSite.Helper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +17,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace BlogThing
+namespace LFGSite
 {
     public class Startup
     {
@@ -31,7 +32,7 @@ namespace BlogThing
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Database
-            services.AddDbContext<BlogDbContext>(options =>
+            services.AddDbContext<SiteDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
@@ -57,7 +58,7 @@ namespace BlogThing
 
                 // Configure the scope
                 options.Scope.Clear();
-                options.Scope.Add("openid");
+                options.Scope.Add("openid email");
 
                 // Set the callback path, so Auth0 will call back to https://localhost:5001/callback
                 // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard
@@ -92,10 +93,12 @@ namespace BlogThing
                     },
                     OnTokenValidated = (context) =>
                     {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.Role, "Administrator")
-                        };
+
+
+                        var db = context.HttpContext.RequestServices.GetRequiredService<SiteDbContext>();
+                        var userHelper = new UserHelper(db);
+                        var email = context.Principal.Claims.Where(c => c.Type.Contains("emailaddress")).FirstOrDefault().Value;
+                        var claims = userHelper.GetUser(email).Groups.Select(g => new Claim(ClaimTypes.Role, g.Name));
 
                         context.Principal.AddIdentity(new ClaimsIdentity(claims));
                         return Task.CompletedTask;

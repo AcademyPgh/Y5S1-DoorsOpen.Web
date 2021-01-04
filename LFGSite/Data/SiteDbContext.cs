@@ -1,15 +1,15 @@
-﻿using BlogThing.Models;
+﻿using LFGSite.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlogThing.Data
+namespace LFGSite.Data
 {
-    public class BlogDbContext : DbContext
+    public class SiteDbContext : DbContext
     {
-        public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
+        public SiteDbContext(DbContextOptions<SiteDbContext> options) : base(options)
         {
         }
 

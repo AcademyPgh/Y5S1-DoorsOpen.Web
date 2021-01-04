@@ -1,6 +1,6 @@
 using System;
 
-namespace BlogThing.Models
+namespace LFGSite.Models
 {
     public class ErrorViewModel
     {

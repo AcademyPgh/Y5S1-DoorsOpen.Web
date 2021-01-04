@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BlogThing.Migrations
+namespace LFGSite.Migrations
 {
     public partial class AddUserGroups : Migration
     {
