@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LFGSite.Controllers
+namespace DoorsOpen.Controllers
 {
     public class AccountController : Controller
     {

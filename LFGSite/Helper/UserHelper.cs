@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LFGSite.Models;
-using LFGSite.Data;
+using DoorsOpen.Models;
+using DoorsOpen.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace LFGSite.Helper
+namespace DoorsOpen.Helper
 {
     public class UserHelper
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace LFGSite.Migrations
+namespace DoorsOpen.Migrations
 {
     public partial class AddUserGroups : Migration
     {

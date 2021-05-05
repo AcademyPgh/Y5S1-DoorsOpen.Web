@@ -1,4 +1,4 @@
-﻿using LFGSite.Models;
+﻿using DoorsOpen.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LFGSite.Controllers
+namespace DoorsOpen.Controllers
 {
     public class HomeController : Controller
     {

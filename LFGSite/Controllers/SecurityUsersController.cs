@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LFGSite.Data;
-using LFGSite.Models;
+using DoorsOpen.Data;
+using DoorsOpen.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace LFGSite.Controllers
+namespace DoorsOpen.Controllers
 {
     [Authorize(Roles = "Administrator")]
     [Route("/admin/users/{action=Index}/{id?}")]

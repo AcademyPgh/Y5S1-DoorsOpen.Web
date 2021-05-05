@@ -1,5 +1,5 @@
-using LFGSite.Data;
-using LFGSite.Helper;
+using DoorsOpen.Data;
+using DoorsOpen.Helper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace LFGSite
+namespace DoorsOpen
 {
     public class Startup
     {
@@ -37,13 +37,32 @@ namespace LFGSite
             );
 
             // Add authentication services
+            string domain = $"https://{Configuration["Auth0:Domain"]}/";
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie()
+            .AddJwtBearer("jwt", options =>
+            {
+                options.Authority = domain;
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
+            })
+            .AddCookie("Cookies", options =>
+            {
+                options.ForwardDefaultSelector = ctx =>
+                {
+                    if (ctx.Request.Path.StartsWithSegments("/api"))
+                    {
+                        return "jwt";
+                    }
+                    else
+                    {
+                        return "Cookies";
+                    }
+                };
+            })
             .AddOpenIdConnect("Auth0", options =>
             {
                 // Set the authority to your Auth0 domain
@@ -66,6 +85,18 @@ namespace LFGSite
 
                 // Configure the Claims Issuer to be Auth0
                 options.ClaimsIssuer = "Auth0";
+
+                options.ForwardDefaultSelector = ctx =>
+                {
+                    if (ctx.Request.Path.StartsWithSegments("/api"))
+                    {
+                        return "jwt";
+                    }
+                    else
+                    {
+                        return "Auth0";
+                    }
+                };
 
                 options.Events = new OpenIdConnectEvents
                 {

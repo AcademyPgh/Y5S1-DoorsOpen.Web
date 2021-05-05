@@ -1,4 +1,4 @@
-using LFGSite.Data;
+using DoorsOpen.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LFGSite
+namespace DoorsOpen
 {
     public class Program
     {

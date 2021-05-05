@@ -1,11 +1,11 @@
-﻿using LFGSite.Models;
+﻿using DoorsOpen.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LFGSite.Data
+namespace DoorsOpen.Data
 {
     public class SiteDbContext : DbContext
     {

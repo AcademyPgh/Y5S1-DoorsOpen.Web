@@ -1,6 +1,6 @@
 using System;
 
-namespace LFGSite.Models
+namespace DoorsOpen.Models
 {
     public class ErrorViewModel
     {
