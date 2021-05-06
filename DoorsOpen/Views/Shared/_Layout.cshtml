@@ -76,10 +76,29 @@
                 <ul class="nav">
 
                     <li class="active">
-                        <a href="../examples/dashboard.html">
+                        <a  href="../BuildingModels/">
                             <i class="now-ui-icons arrows-1_minimal-right"></i>
-                            <p>Example 1</p>
+                            <p>
+                            Buildings
+                            <b class="caret"></b>
+                            </p>
                         </a>
+                        <div class="collapse" id="pagesExamples">
+                            <ul class="nav">
+                                <li>
+                                    <a href="../BuildingModels/Create">
+                                        <span class="sidebar-mini-icon">C1</span>
+                                        <span class="sidebar-normal">Collapse 1</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../examples/pages/timeline.html">
+                                        <span class="sidebar-mini-icon">C2</span>
+                                        <span class="sidebar-normal">Collapse 2</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                     <li>
@@ -191,11 +210,6 @@
             </div>
 
             <div class="content">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Hello, world!</h3>
-                    </div>
-                </div>
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
