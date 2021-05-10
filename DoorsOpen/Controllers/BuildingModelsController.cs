@@ -108,7 +108,7 @@ namespace DoorsOpen.Controllers
 
             if (ModelState.IsValid)
             {
-                var buildingToEdit = await _context.Buildings.FindAsync(id);
+                var buildingToEdit = _context.Buildings.Where(b => b.Id == buildingModel.Id).FirstOrDefault();
 
                 var deleteImage = false;
                 if (buildingToEdit.Image != buildingModel.Image || upload != null)
@@ -129,28 +129,32 @@ namespace DoorsOpen.Controllers
                 }
                 if (upload != null)
                 {
-                    buildingModel.Image = GetFileName(upload);
+                    string imageName = GetFileName(upload);
+                    buildingModel.Image = imageName;
+                    UploadToAzure(imageName, upload);
+                    Console.WriteLine(buildingModel.Image);
                 }
 
+                buildingToEdit.Building = buildingModel.Building;
+                buildingToEdit.Address1 = buildingModel.Address1;
+                buildingToEdit.Address2 = buildingModel.Address2;
+                buildingToEdit.City = buildingModel.City;
+                buildingToEdit.State = buildingModel.State;
+                buildingToEdit.Zip = buildingModel.Zip;
+                buildingToEdit.WheelchairAccessible = buildingModel.WheelchairAccessible;
+                buildingToEdit.RestroomsAvailable = buildingModel.RestroomsAvailable;
+                buildingToEdit.WheelchairAccessibleRestroom = buildingModel.WheelchairAccessibleRestroom;
+                buildingToEdit.PhotographyAllowed = buildingModel.PhotographyAllowed;
+                buildingToEdit.StartTime = buildingModel.StartTime;
+                buildingToEdit.EndTime = buildingModel.EndTime;
+                buildingToEdit.Capacity = buildingModel.Capacity;
+                buildingToEdit.HistoricalOverview = buildingModel.HistoricalOverview;
+                buildingToEdit.VisitorExperience = buildingModel.VisitorExperience;
+                buildingToEdit.Image = buildingModel.Image;
 
+                _context.SaveChanges();
 
-                try
-                {
-                    _context.Update(buildingModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BuildingModelExists(buildingModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View(buildingModel);
         }
