@@ -36,5 +36,6 @@ namespace DoorsOpen.Models
 		[Display(Name = "Visitor Experience")]
 		public string VisitorExperience { get; set; }
 
+		public string Image { get; set; }
 	}
 }

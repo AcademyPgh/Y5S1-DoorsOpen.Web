@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Building" class="control-label"></label>
@@ -98,6 +98,26 @@
                 <label asp-for="VisitorExperience" class="control-label"></label>
                 <input asp-for="VisitorExperience" class="form-control" />
                 <span asp-validation-for="VisitorExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
+                        @if (Model != null && Model.Image != null)
+                        {
+                            <img src="@Url.Content(Model.Image)" class="photo" id="imageUrl" alt="..." />
+                        }
+                        else
+                        {
+                            <img src="/content/img/400x400.png" class="photo" id="imageUrl" alt="...">
+                        }
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="upload"></span>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Original</a>
+                        <div class="btn btn-default fileinput-new" id="delete-image">Remove Image</div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
