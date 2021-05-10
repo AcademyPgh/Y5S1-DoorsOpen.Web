@@ -34,6 +34,7 @@ namespace DoorsOpen.Controllers
             }
 
             var eventModel = await _context.Events
+                .Include(m => m.Buildings)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (eventModel == null)
             {
