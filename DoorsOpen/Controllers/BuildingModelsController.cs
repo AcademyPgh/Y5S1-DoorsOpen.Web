@@ -123,7 +123,7 @@ namespace DoorsOpen.Controllers
                 {
                     if (!string.IsNullOrEmpty(buildingModel.Image))
                     {
-                        //DeleteFromAzure(buildingModel.Image);
+                        DeleteFromAzure(buildingModel.Image);
                         buildingModel.Image = null;
                     }
                 }
@@ -218,6 +218,19 @@ namespace DoorsOpen.Controllers
             containerClient.UploadBlob(imageName, upload.OpenReadStream());
         }
 
-        //public void 
+        public void DeleteFromAzure(string imageName)
+        {
+            // Azure needs your connection string like a db
+            string connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                connectionString = _config.GetValue<string>("AzureConnectionString");
+            }
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+            // Azure needs to know what folder you want to save in
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("dev-images");
+            // Then, you can get a blob writer thing from azure
+            containerClient.DeleteBlobIfExists(imageName);
+        }
     }
 }
