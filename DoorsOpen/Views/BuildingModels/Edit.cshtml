@@ -104,28 +104,28 @@
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
                         @{
-                            string image_src = "https://academydev.blob.core.windows.net/dev-images/" + Model.Image;
+                            string image_src = "https://doorsopen.blob.core.windows.net/dev-images/" + Model.Image;
                         }
-                        <img src=@image_src class="photo" id="imageUrl" alt="..." />
-                        @*@if (Model != null && Model.Image != null)
-        {
-            <img src="@Url.Content(Model.Image)" class="photo" id="imageUrl" alt="..." />
-        }
-        else
-        {
-            <img src="/content/img/400x400.png" class="photo" id="imageUrl" alt="...">
-        }*@
+                        @if (Model != null && Model.Image != null)
+                        {
+                            <img src="@image_src" class="photo" id="imageUrl" alt="..." />
+                        }
+                        else
+                        {
+                            <img src="/content/img/400x400.png" class="photo" id="imageUrl" alt="...">
+                        }
                     </div>
-                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                    </div>
                     <div>
                         <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="upload"></span>
                         <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Original</a>
-                        <div class="btn btn-default fileinput-new" id="delete-image">Remove Image</div><br />
+                        <div class="btn btn-default fileinput-new" id="delete-image">Remove Image</div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <input type="hidden" id="image" name="Image" value="@Model.Image" />
+                <input type="hidden" id="Image" name="Image" value="@Model.Image" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -140,4 +140,27 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('#delete-image').click(function () {
+            var image = $("#Image").val();
+            console.log("the value of image is: " + image);
+            $('#Image').val('');
+            $('#imageUrl').attr('src', '/content/img/400x400.png');
+        });
+
+        function previewfile() {
+            //displays a preview version of the image before it is saved to the database
+            var preview = document.querySelector('#img-display');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+            reader.addEventListener("load", function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+    </script>
 }
