@@ -10,6 +10,12 @@ namespace DoorsOpen.Models
 {
 	public class BuildingModel
 	{
+		// private readonly IConfiguration _config;
+
+		// public BuildingModel(IConfiguration configuration)
+        // {
+        //     _config = configuration;
+        // }
 		public int Id { get; set; }
 		public string Building { get; set; }
 		[Display(Name = "Address")]
@@ -38,5 +44,20 @@ namespace DoorsOpen.Models
 		public string VisitorExperience { get; set; }
 
 		public string Image { get; set; }
+
+		public string FullAddress { get {
+			return $"{Address1} {Address2} {City}, {State} {Zip}";
+			}
+		}
+
+		// public string ImageURL { get {
+		// 	if (Image == null){
+		// 		return null;
+		// 		}
+		// 	else {
+		// 		return $"{_config.GetValue<string>("AzureImagePrefix")}{Image}";
+		// 		}
+		// 	}
+		// }
 	}
 }
