@@ -22,7 +22,10 @@ namespace DoorsOpen.Controllers
         // GET: EventModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Events.ToListAsync());
+            return View(await _context.Events
+                .OrderByDescending
+                (m => m.IsActive).
+                ToListAsync());
         }
 
         // GET: EventModels/Details/5
@@ -77,6 +80,20 @@ namespace DoorsOpen.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(eventModel);
+        }
+
+        public async Task<IActionResult> SetActive(int id)
+        {
+            var eventModel = await _context.Events.FirstOrDefaultAsync(m => m.Id == id);
+            eventModel.IsActive = true;
+
+            var allOtherEvents = await _context.Events.Where(m => m.Id != id).ToListAsync();
+            foreach (EventModel e in allOtherEvents)
+            {
+                e.IsActive = false;
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: EventModels/Edit/5
