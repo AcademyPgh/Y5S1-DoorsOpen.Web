@@ -128,6 +128,7 @@ namespace DoorsOpen.Controllers
                         buildingModel.Image = null;
                     }
                 }
+
                 if (upload != null)
                 {
                     string imageName = GetFileName(upload);
@@ -231,6 +232,7 @@ namespace DoorsOpen.Controllers
             {
                 connectionString = _config.GetValue<string>("AzureConnectionString");
             }
+
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
             // Azure needs to know what folder you want to save in
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("dev-images");
