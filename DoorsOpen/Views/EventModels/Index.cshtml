@@ -40,10 +40,19 @@
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
+                @{
+                    if (item.IsActive)
+                    {
+                        <span style="color:green">Yes </span>
+                    }
+                    else
+                    {
+                        <a asp-action="SetActive" asp-route-id="@item.Id" class="btn btn-primary" role="button">Set Active</a>
+                    }
+
+                }
             </td>
             <td>
-                <a asp-action="SetActive" asp-route-id="@item.Id">Set Active</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
