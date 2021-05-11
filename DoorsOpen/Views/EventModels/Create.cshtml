@@ -28,13 +28,16 @@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <span class="form-check-sign">
+                        <span class="check"></span>
+                    </span>
                 </label>
             </div>
             @foreach (var b in (List<BuildingModel>)ViewData["buildings"])
             {
                 <div class="form-group">
                     <input type="checkbox" class="form-check-input" name="selectedBuildings" value="@b.Id" />
-                    <label for="@b.Id">@b.Building @b.A</label><br />
+                    <label for="@b.Id">@b.Building, @b.FullAddress</label><br />
                 </div>
             }
             <div class="form-group">

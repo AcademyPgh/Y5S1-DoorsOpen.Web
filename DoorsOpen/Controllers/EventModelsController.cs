@@ -61,11 +61,14 @@ namespace DoorsOpen.Controllers
         public async Task<IActionResult> Create([Bind("Id,Name,StartDate,EndDate,IsActive")] EventModel eventModel, int[] selectedBuildings)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 eventModel.Buildings = new List<BuildingModel>();
+                // loop through the selected buildings Ids
                 foreach (int bId in selectedBuildings)
                 {
+                    // retrieve a building from the db for the id
                     BuildingModel b = _context.Buildings.Where(b => b.Id == bId).FirstOrDefault();
+                    // add the building to the list of buildings for this event
                     eventModel.Buildings.Add(b);
                 }
 
