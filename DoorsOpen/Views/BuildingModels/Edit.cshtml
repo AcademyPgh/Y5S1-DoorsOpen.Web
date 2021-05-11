@@ -105,6 +105,7 @@
                     <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
                         @{
                             string image_src = "https://doorsopen.blob.core.windows.net/dev-images/" + Model.Image;
+                            @* string image_src = Model.ImageURL; *@
                         }
                         @if (Model != null && Model.Image != null)
                         {
@@ -118,7 +119,7 @@
                     <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
                     </div>
                     <div>
-                        <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="upload"></span>
+                        <span class="btn btn-default btn-file"><span class="fileinput-new">Change Image</span><span class="fileinput-exists">Change</span><input type="file" name="upload"></span>
                         <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Original</a>
                         <div class="btn btn-default fileinput-new" id="delete-image">Remove Image</div>
                     </div>

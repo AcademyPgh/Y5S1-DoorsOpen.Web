@@ -101,7 +101,13 @@
         </dd>
     </dl>
 </div>
-<div>
+@* Testing displaying uploaded image on details page *@
+    <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
+    @* @{ string image_src = Model.ImageURL;} *@
+    @{string image_src = "https://doorsopen.blob.core.windows.net/dev-images/" + Model.Image;}
+    <img src="@image_src" class="photo" id="imageUrl" alt="..." />
+</div>
+<div style="margin-top: 20px;">
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
