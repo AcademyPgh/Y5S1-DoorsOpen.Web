@@ -104,11 +104,19 @@ namespace DoorsOpen.Controllers
                 return NotFound();
             }
 
-            var eventModel = await _context.Events.FindAsync(id);
+            var eventModel = await _context.Events
+            .Include(m => m.Buildings)
+            .FirstOrDefaultAsync(m => m.Id == id);
+
             if (eventModel == null)
             {
                 return NotFound();
             }
+
+            // Get a list of all buildings in the db and pass it to the view
+            var buildings = _context.Buildings.ToList();
+            ViewData["buildings"] = buildings;
+
             return View(eventModel);
         }
 
@@ -117,8 +125,16 @@ namespace DoorsOpen.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,StartDate,EndDate,IsActive")] EventModel eventModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,StartDate,EndDate,IsActive")] EventModel eventModel, int[] selectedBuildings)
         {
+
+            // clear the relationship between the event being edited and the current buildings associated with it
+            var eventToEdit = _context.Events
+                .Where(m => m.Id == id)
+                .Include(m => m.Buildings)
+                .FirstOrDefault();
+            eventToEdit.Buildings.Clear();
+
             if (id != eventModel.Id)
             {
                 return NotFound();
@@ -126,23 +142,25 @@ namespace DoorsOpen.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                // loop through the selected buildings Ids
+                foreach (int bId in selectedBuildings)
                 {
-                    _context.Update(eventModel);
-                    await _context.SaveChangesAsync();
+                    // retrieve a building from the db for the id
+                    BuildingModel b = _context.Buildings.Where(b => b.Id == bId).FirstOrDefault();
+                    // add the building to the list of buildings for this event
+                    eventToEdit.Buildings.Add(b);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventModelExists(eventModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+                // update remaining information from the form
+                eventToEdit.Name = eventModel.Name;
+                eventToEdit.StartDate = eventModel.StartDate;
+                eventToEdit.EndDate = eventModel.EndDate;
+                eventToEdit.IsActive = eventModel.IsActive;
+                // save all changes to database
+                _context.SaveChanges();
+
+                // redirect to the details view for this event
+                return RedirectToAction("Details", new { id = id });
             }
             return View(eventModel);
         }

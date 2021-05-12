@@ -35,12 +35,30 @@
                     </span>
                 </label>
             </div>
+            <label class="control-label">Set Buildings</label>
+            @foreach (var b in (List<BuildingModel>)ViewData["buildings"])
+            {
+                <div class="form-group">
+                    <input type="checkbox" class="form-check-input" name="selectedBuildings" value="@b.Id" />
+                    <label for="@b.Id">@b.Building, @b.FullAddress</label><br />
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    <div class="col-md-4">
+        <h4>Current Buildings for Event</h4>
+        <ol>
+            @foreach (BuildingModel currentBuilding in Model.Buildings)
+            {
+                <li>@currentBuilding.Building</li>
+            }
+        </ol>
+    </div>
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
