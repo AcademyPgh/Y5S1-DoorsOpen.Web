@@ -7,58 +7,65 @@
 <h1>Edit</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <input asp-for="EndDate" class="form-control" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                            <span class="form-check-sign">
+                                <span class="check" style="background-color: white"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <label class="control-label">Set Buildings</label>
+                    @foreach (var b in (List<BuildingModel>)ViewData["buildings"])
+                    {
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="selectedBuildings" value="@b.Id" />@b.Building, @b.FullAddress
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
+            <div class="col-md-4">
+                <h4>Current Buildings for Event</h4>
+                <ol>
+                    @foreach (BuildingModel currentBuilding in Model.Buildings)
+                    {
+                        <li>@currentBuilding.Building</li>
+                    }
+                </ol>
             </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                    <span class="form-check-sign">
-                        <span class="check" style="background-color: white"></span>
-                    </span>
-                </label>
-            </div>
-            <label class="control-label">Set Buildings</label>
-            @foreach (var b in (List<BuildingModel>)ViewData["buildings"])
-            {
-                <div class="form-group">
-                    <input type="checkbox" class="form-check-input" name="selectedBuildings" value="@b.Id" />
-                    <label for="@b.Id">@b.Building, @b.FullAddress</label><br />
-                </div>
-            }
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-    <div class="col-md-4">
-        <h4>Current Buildings for Event</h4>
-        <ol>
-            @foreach (BuildingModel currentBuilding in Model.Buildings)
-            {
-                <li>@currentBuilding.Building</li>
-            }
-        </ol>
+        </div>
     </div>
 </div>
-
 
 <div>
     <a asp-action="Index">Back to List</a>
