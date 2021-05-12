@@ -23,9 +23,9 @@ namespace DoorsOpen.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Events
-                .OrderByDescending
-                (m => m.IsActive).
-                ToListAsync());
+                .OrderByDescending(m => m.IsActive)
+                .ThenBy(m => m.StartDate)
+                .ToListAsync());
         }
 
         // GET: EventModels/Details/5
