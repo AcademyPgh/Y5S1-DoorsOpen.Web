@@ -113,7 +113,7 @@ namespace DoorsOpen.Controllers
                 return NotFound();
             }
 
-            // get a list of building ids that belong to the event
+            // get a list of building ids that belong to the event and pass to view
             var checkedBuildings = eventModel.Buildings.Select(b => b.Id).ToList();
             ViewBag.checkedBuildings = checkedBuildings;
 

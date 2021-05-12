@@ -52,7 +52,7 @@
                                 }
                                 else
                                 {
-                                    <input class="form-check-input" type="checkbox" name="selectedBuildings" value="@b.Id"/>
+                                    <input class="form-check-input" type="checkbox" name="selectedBuildings" value="@b.Id" />
                                     <text>@b.Building, @b.FullAddress</text>
                                     <span class="form-check-sign">
                                         <span class="check"></span>
@@ -66,15 +66,6 @@
                         <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
                 </form>
-            </div>
-            <div class="col-md-4">
-                <h4>Current Buildings for Event</h4>
-                <ol>
-                    @foreach (BuildingModel currentBuilding in Model.Buildings)
-                    {
-                        <li>@currentBuilding.Building</li>
-                    }
-                </ol>
             </div>
         </div>
     </div>
