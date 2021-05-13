@@ -109,7 +109,7 @@ namespace DoorsOpen.Controllers
 
             if (ModelState.IsValid)
             {
-                var buildingToEdit = _context.Buildings.Where(b => b.Id == buildingModel.Id).FirstOrDefault();
+                var buildingToEdit = await _context.Buildings.Where(b => b.Id == buildingModel.Id).FirstOrDefaultAsync();
 
                 var deleteImage = false;
                 if (buildingToEdit.Image != buildingModel.Image || upload != null)
