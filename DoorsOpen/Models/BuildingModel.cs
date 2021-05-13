@@ -10,12 +10,16 @@ namespace DoorsOpen.Models
 {
 	public class BuildingModel
 	{
-		// private readonly IConfiguration _config;
+		private readonly IConfiguration _config;
 
-		// public BuildingModel(IConfiguration configuration)
-        // {
-        //     _config = configuration;
-        // }
+		public BuildingModel()
+		{
+
+		}
+		public BuildingModel(IConfiguration configuration)
+        {
+            _config = configuration;
+        }
 		public int Id { get; set; }
 		public string Building { get; set; }
 		[Display(Name = "Address")]
@@ -50,14 +54,15 @@ namespace DoorsOpen.Models
 			}
 		}
 
-		// public string ImageURL { get {
-		// 	if (Image == null){
-		// 		return null;
-		// 		}
-		// 	else {
-		// 		return $"{_config.GetValue<string>("AzureImagePrefix")}{Image}";
-		// 		}
-		// 	}
-		// }
+		public string ImageURL { get {
+			if (Image == null){
+				return null;
+				}
+			else {
+				// return $"{_config.GetValue<string>("AzureImagePrefix")}{Image}";
+				return "https://doorsopen.blob.core.windows.net/dev-images/" + Image;
+				}
+			}
+		}
 	}
 }
