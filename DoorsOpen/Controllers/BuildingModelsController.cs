@@ -226,18 +226,23 @@ namespace DoorsOpen.Controllers
 
         public void DeleteFromAzure(string imageName)
         {
-            // Azure needs your connection string like a db
+            // need connection to Azure just like a local db
             string connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
             if (string.IsNullOrEmpty(connectionString))
             {
                 connectionString = _config.GetValue<string>("AzureConnectionString");
             }
-
+            // connect to Azure
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            // Azure needs to know what folder you want to save in
+            // go to a specific folder
             BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("dev-images");
-            // Then, you can get a blob writer thing from azure
-            containerClient.DeleteBlobIfExists(imageName);
+            // find a specific file
+            BlobClient blob = containerClient.GetBlobClient($"{imageName}");        
+            // delete if exists
+            if (blob.Exists())
+            {
+                blob.Delete();
+            }
         }
     }
 }

@@ -45,8 +45,13 @@ namespace DoorsOpen.Models
 
 		public string Image { get; set; }
 
-		public string FullAddress { get {
-			return $"{Address1} {Address2} {City}, {State} {Zip}";
+		public string FullAddress { get
+			{
+				if (Address2 == null)
+                {
+					return $"{Address1} {City}, {State} {Zip}";
+				}
+				return $"{Address1} {Address2} {City}, {State} {Zip}";
 			}
 		}
 
