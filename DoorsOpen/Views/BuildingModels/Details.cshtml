@@ -101,7 +101,8 @@
         </dd>
     </dl>
 </div>
-@* Testing displaying uploaded image on details page *@
+@* Testing displaying uploaded image on details page 
+Should add an if Model.ImageURL !null condition*@
     <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
     @* @{ string image_src = Model.ImageURL;} *@
     @{string image_src = "https://doorsopen.blob.core.windows.net/dev-images/" + Model.Image;}

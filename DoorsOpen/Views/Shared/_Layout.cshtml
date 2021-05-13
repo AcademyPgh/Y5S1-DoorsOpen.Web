@@ -11,27 +11,27 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="sidebar-mini">
+<body class="">
     <div class="wrapper">
         <div class="sidebar" data-color="orange">
             <div class="logo">
-                <a href="https://localhost:44339/" class="simple-text logo-mini">
-                    <i class="now-ui-icons design_app"></i>
+                <a href="https://doorsopenpgh.org/" class="simple-text logo-mini" target ="_blank">
+                    <i class="now-ui-icons shopping_shop"></i>
                 </a>
 
-                <a href="https://localhost:44339/" class="simple-text logo-normal">
+                <a href="https://doorsopenpgh.org/" class="simple-text logo-normal" target ="_blank">
                     Doors Open PGH
                 </a>
-                <div class="navbar-minimize">
+                @* <div class="navbar-minimize">
                     <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
                         <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
                         <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
                     </button>
-                </div>
+                </div> *@
             </div>
 
             <div class="sidebar-wrapper">
-                <div class="user">
+                @* <div class="user">
                     <div class="photo">
                         <img src="/assets/img/james.jpg" />
                     </div>
@@ -66,7 +66,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> *@
                 <ul class="nav">
 
                     <li>
@@ -146,34 +146,27 @@
 
 
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    @* <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
-                    </button>
+                    </button> *@
 
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
 
 
-
-                        <form>
+                        @* Removed template for search, and users in case we want to add that function later *@
+                        @* <form>
                             <div class="input-group no-border">
                                 <input type="text" value="" class="form-control" placeholder="Search...">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons ui-1_zoom-bold"></i>
                                 </span>
                             </div>
-                        </form>
+                        </form> *@
 
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
-                                    <i class="now-ui-icons media-2_sound-wave"></i>
-                                    <p>
-                                        <span class="d-lg-none d-md-block">Stats</span>
-                                    </p>
-                                </a>
-                            </li>
+                        @* <ul class="navbar-nav">
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons location_world"></i>
@@ -196,7 +189,7 @@
                                     </p>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> *@
 
 
                     </div>
