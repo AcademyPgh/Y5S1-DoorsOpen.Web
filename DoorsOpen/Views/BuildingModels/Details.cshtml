@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Building)</h1>
+<h1>@Html.DisplayFor(model => model.Building) - Details</h1>
 
 <hr />
 <div class="card">
@@ -103,8 +103,8 @@
         </dl>
         @* Testing displaying uploaded image on details page *@
         <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
-            @* @{ string image_src = Model.ImageURL;} *@
-            @{string image_src = "https://doorsopen.blob.core.windows.net/dev-images/" + Model.Image;}
+            @{ string image_src = Model.ImageURL;}
+
             <img src="@image_src" class="photo" id="imageUrl" alt="..." />
         </div>
     </div>
