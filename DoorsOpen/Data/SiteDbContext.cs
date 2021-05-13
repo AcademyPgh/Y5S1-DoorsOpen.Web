@@ -15,5 +15,8 @@ namespace DoorsOpen.Data
 
         public DbSet<SecurityUser> User { get; set; }
         public DbSet<SecurityGroup> Groups { get; set; }
+        public DbSet<BuildingModel> Buildings { get; set; }
+        public DbSet<EventModel> Events { get; set; }
     }
 }
+
