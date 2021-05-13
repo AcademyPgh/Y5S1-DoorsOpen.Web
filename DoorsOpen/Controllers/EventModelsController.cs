@@ -133,10 +133,10 @@ namespace DoorsOpen.Controllers
         {
 
             // clear the relationship between the event being edited and the current buildings associated with it
-            var eventToEdit = _context.Events
+            var eventToEdit = await _context.Events
                 .Where(m => m.Id == id)
                 .Include(m => m.Buildings)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
             eventToEdit.Buildings.Clear();
 
             if (id != eventModel.Id)
