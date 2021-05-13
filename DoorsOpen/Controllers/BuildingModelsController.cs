@@ -219,7 +219,7 @@ namespace DoorsOpen.Controllers
             }
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
             // Azure needs to know what folder you want to save in
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("dev-images");
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("images");
             // Then, you can get a blob writer thing from azure
             containerClient.UploadBlob(imageName, upload.OpenReadStream());
         }
