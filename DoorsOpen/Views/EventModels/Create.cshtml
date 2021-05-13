@@ -19,12 +19,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="StartDate" class="control-label"></label>
-                        <input asp-for="StartDate" class="form-control datetimepicker" />
+                        <input type="text" name="StartDate" class="form-control datetimepicker" value="@DateTime.Now" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EndDate" class="control-label"></label>
-                        <input asp-for="EndDate" class="form-control datetimepicker" />
+                        <input type="text" name="EndDate" class="form-control datetimepicker" value="@DateTime.Now" />
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>
                     <label class="control-label">Buildings</label>
@@ -55,4 +55,23 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-}
+    <script>
+        jQuery(document).ready(function () {
+            $('.datetimepicker').datetimepicker({
+                icons: {
+                    time: "far fa-clock",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove'
+                }
+            });
+        });
+    </script>
+});
+
+
