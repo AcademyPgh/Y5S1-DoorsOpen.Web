@@ -47,7 +47,7 @@ namespace DoorsOpen.Controllers
                 return NotFound();
             }
 
-            return View(buildingModel);
+            return View(new BuildingViewModel(buildingModel, _config.GetValue<string>("AzureImagePrefix")));
         }
 
         // GET: BuildingModels/Create
@@ -92,7 +92,7 @@ namespace DoorsOpen.Controllers
             {
                 return NotFound();
             }
-            return View(buildingModel);
+            return View(new BuildingViewModel(buildingModel, _config.GetValue<string>("AzureImagePrefix")));
         }
 
         // POST: BuildingModels/Edit/5
