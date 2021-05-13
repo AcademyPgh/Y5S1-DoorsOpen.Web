@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DoorsOpen.Data;
 using DoorsOpen.Models;
 
+
 namespace DoorsOpen.Controllers
 {
     public class EventModelsController : Controller
@@ -141,6 +142,8 @@ namespace DoorsOpen.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var eventModel = await _context.Events.FindAsync(id);
+            //var buildingModel = await _context.Buildings.
+            BuildingModelsController.RemoveByEventModelId(id, _context);
             _context.Events.Remove(eventModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

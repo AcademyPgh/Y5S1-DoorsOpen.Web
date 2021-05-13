@@ -63,6 +63,7 @@ namespace DoorsOpen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Building,Address1,Address2,City,State,Zip,WheelchairAccessible,RestroomsAvailable,WheelchairAccessibleRestroom,PhotographyAllowed,StartTime,EndTime,Capacity,HistoricalOverview,VisitorExperience,Image")] BuildingModel buildingModel, IFormFile upload)
         {
+
             if (ModelState.IsValid)
             {
                 if (upload != null)
@@ -176,6 +177,24 @@ namespace DoorsOpen.Controllers
             }
 
             return View(buildingModel);
+        }
+
+        public static bool RemoveByEventModelId(int eventModelId, SiteDbContext _context)
+        {
+            try
+            {
+                var buildingModels = _context.Buildings.Where(b => b.EventModelId == eventModelId);
+                foreach (var buildingModel in buildingModels)
+                {
+                    _context.Buildings.Remove(buildingModel);
+
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         // POST: BuildingModels/Delete/5

@@ -35,7 +35,8 @@ namespace DoorsOpen.Models
 		public string HistoricalOverview { get; set; }
 		[Display(Name = "Visitor Experience")]
 		public string VisitorExperience { get; set; }
-
 		public string Image { get; set; }
+		public int EventModelId { get; set; }
+
 	}
 }
