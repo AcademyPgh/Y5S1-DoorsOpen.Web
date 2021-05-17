@@ -73,3 +73,20 @@ body {
     padding: 10px 30px 30px;
     margin-top: 0px;
 }
+
+.my-panel-header {
+    height: 75px;
+    background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
+}
+
+.get-started {
+    display:flex;
+    align-content:center;
+    justify-content: center;
+    height: 10em;
+}
+
+.get-started a {
+    position: absolute;
+    bottom: 1em;
+}
