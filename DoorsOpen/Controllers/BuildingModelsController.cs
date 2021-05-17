@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Http;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoorsOpen.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BuildingModelsController : Controller
     {
         private readonly SiteDbContext _context;

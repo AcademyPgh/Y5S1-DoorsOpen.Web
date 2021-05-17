@@ -73,3 +73,13 @@ body {
     padding: 10px 30px 30px;
     margin-top: 0px;
 }
+
+iframe {
+    width: 100%;
+    height: 90vh;
+}
+
+.my-panel-header {
+    height: 75px;
+    background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
+}

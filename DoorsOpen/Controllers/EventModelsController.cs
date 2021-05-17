@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoorsOpen.Data;
 using DoorsOpen.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoorsOpen.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class EventModelsController : Controller
     {
         private readonly SiteDbContext _context;
